@@ -18,8 +18,14 @@ def main(script):
     """Tests the functions in this module.
 
     script: string script name
+    http://www.icpsr.umich.edu/nsfg6/Controller?displayPage=labelDetails&fileCode=FEM&section=R&subSec=7869&srtLabel=606835
     """
-    print('%s: All tests passed.' % script)
+    dct = thinkstats2.ReadStataDct("2002FemResp.dct")
+    df = dct.ReadFixedWidth("2002FemResp.dat.gz", compression='gzip')
+    pregnum = df.pregnum.value_counts().sort_index()
+    preg_map = nsfg.MakePregMap(df)
+    print(preg_map)
+    print(pregnum)
 
 
 if __name__ == '__main__':
