@@ -21,7 +21,7 @@ def Mode(hist):
 
     returns: value from Hist
     """
-    return 0
+    return max([(p, x) for x, p in hist.Items()])[1]
 
 
 def AllModes(hist):
@@ -31,8 +31,26 @@ def AllModes(hist):
 
     returns: iterator of value-freq pairs
     """
-    return []
+    return sorted(hist.Items(), key=itemgetter(1), reverse=True)
 
+
+def WeightDifferences(first, other, live):
+    print("Means:")
+
+    first_mean = first.totalwgt_lb.mean()
+    print("First mean:", first_mean)
+
+    other_mean = other.totalwgt_lb.mean()
+    print("Other mean:", other_mean)
+
+    live_mean = live.totalwgt_lb.mean()
+    print("Live mean:", live_mean)
+
+    print("Means differences:")
+    print((abs(first_mean - other_mean) / live_mean)*100)
+
+    d = thinkstats2.CohenEffectSize(first.totalwgt_lb, other.totalwgt_lb)
+    return d
 
 def main(script):
     """Tests the functions in this module.
@@ -53,6 +71,9 @@ def main(script):
 
     for value, freq in modes[:5]:
         print(value, freq)
+
+    d = WeightDifferences(firsts, others, live)
+    print("Cohens'd Effect:", d)
 
     print('%s: All tests passed.' % script)
 
