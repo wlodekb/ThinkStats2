@@ -82,6 +82,16 @@ def BinData(data, low, high, n):
     return data
 
 
+def ObservedPmf(pmf, speed, label=None):
+    new_pmf = pmf.Copy(label=label)
+    for v in pmf.Values():
+        diff = abs(v - speed)
+        new_pmf.Mult(v, diff)
+    
+    new_pmf.Normalize()
+    return new_pmf
+
+
 def main():
     results = ReadResults()
     speeds = GetSpeeds(results)
@@ -89,8 +99,10 @@ def main():
     speeds = BinData(speeds, 3, 12, 100)
 
     pmf = thinkstats2.Pmf(speeds, 'speeds')
+    pmf_biased = ObservedPmf(pmf, 7, 'biased speeds')
 
-    thinkplot.Pmf(pmf)
+    thinkplot.PrePlot(2, cols=2)
+    thinkplot.Pmfs([pmf, pmf_biased])
     thinkplot.Show(title='PMF of running speed',
                    xlabel='speed (mph)',
                    ylabel='probability')
