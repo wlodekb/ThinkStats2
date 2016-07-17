@@ -46,8 +46,7 @@ def WeightDifferences(first, other, live):
     live_mean = live.totalwgt_lb.mean()
     print("Live mean:", live_mean)
 
-    print("Means differences:")
-    print((abs(first_mean - other_mean) / live_mean)*100)
+    print("Means differences:", (abs(first_mean - other_mean) / live_mean)*100)
 
     d = thinkstats2.CohenEffectSize(first.totalwgt_lb, other.totalwgt_lb)
     return d
