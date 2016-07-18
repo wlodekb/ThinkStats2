@@ -101,11 +101,12 @@ def main():
     pmf = thinkstats2.Pmf(speeds, 'speeds')
     pmf_biased = ObservedPmf(pmf, 7, 'biased speeds')
 
-    thinkplot.PrePlot(2, cols=2)
+    thinkplot.PrePlot(2)
     thinkplot.Pmfs([pmf, pmf_biased])
     thinkplot.Show(title='PMF of running speed',
                    xlabel='speed (mph)',
-                   ylabel='probability')
+                   ylabel='probability',
+                   axis=[0, 13, 0, 0.27])
 
 
 if __name__ == '__main__':
