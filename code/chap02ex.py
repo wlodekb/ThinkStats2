@@ -51,6 +51,11 @@ def WeightDifferences(first, other, live):
     d = thinkstats2.CohenEffectSize(first.totalwgt_lb, other.totalwgt_lb)
     return d
 
+
+def PregnancyLengthDifferences(first, other):
+    return thinkstats2.CohenEffectSize(first.prglngth, other.prglngth)
+
+
 def main(script):
     """Tests the functions in this module.
 
@@ -71,8 +76,11 @@ def main(script):
     for value, freq in modes[:5]:
         print(value, freq)
 
-    d = WeightDifferences(firsts, others, live)
-    print("Cohens'd Effect:", d)
+    d1 = WeightDifferences(firsts, others, live)
+    print("Cohens'd Effect of weight differences:", d1)
+
+    d2 = PregnancyLengthDifferences(firsts, others)
+    print("Cohens'd Effect of pregnancy length differences:", d2)
 
     print('%s: All tests passed.' % script)
 
