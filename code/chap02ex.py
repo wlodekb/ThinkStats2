@@ -21,7 +21,7 @@ def Mode(hist):
 
     returns: value from Hist
     """
-    return max([(p, x) for x, p in hist.Items()])[1]
+    return max([(f, x) for x, f in hist.Items()])[1]
 
 
 def AllModes(hist):
